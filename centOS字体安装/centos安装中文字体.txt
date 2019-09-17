@@ -1,0 +1,14 @@
+1、mkdir -p /usr/share/fonts/chinese
+2、先从你本机 C:\Windows\Fonts 拷贝或者网络上下载你想要安装的字体文件（*.ttf文件）到 /usr/share/fonts/chinese 目录下
+3、修改字体文件的权限，使root用户以外的用户也可以使用
+# cd /usr/share/fonts/chinese
+# chmod 755 *.ttf
+# chmod 755 *.ttc
+4、建立字体缓存
+# mkfontscale （如果提示 mkfontscale: command not found，需自行安装 # yum install mkfontscale ）
+# mkfontdir 
+# fc-cache -fv （如果提示 fc-cache: command not found，则需要安装# yum install fontconfig ）
+5、重启计算机
+# reboot
+6、查看字体列表
+# fc-list

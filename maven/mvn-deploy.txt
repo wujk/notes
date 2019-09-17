@@ -1,0 +1,1 @@
+mvn deploy:deploy-file -DgroupId=com.alibaba -DartifactId=dubbo -Dversion=2.5.4-SNAPSHOT -Dpackaging=jar -Dfile=C:\Users\ci11951\Desktop\dubbo-2.5.4-SNAPSHOT.jar -Durl=http://192.168.140.215:8081/repository/maven-snapshots/ -DrepositoryId=maven-snapshots

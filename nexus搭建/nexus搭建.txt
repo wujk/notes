@@ -1,0 +1,7 @@
+1、下载nexus-3.7.1-02-unix.tar.gz
+2、tar -zxvf nexus-3.7.1-02-unix.tar.gz
+3、进入nexus-3.7.1/bin 
+vi nexus.rc  
+run_as_user="root"
+4、vi nexus  
+INSTALL4J_JAVA_HOME_OVERRIDE=/usr/java/jdk1.8.0_121
