@@ -1,0 +1,8 @@
+安装：
+1、下载rpm包。如wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.2.0-x86_64.rpm
+2、rpm --install elasticsearch-7.2.0-x86_64.rpm
+
+卸载：
+1、rpm -qa | grep elasticsearch 查看已安装的包
+2、rpm -e --nodeps elasticsearch-7.2.0-1.x86_64
+
