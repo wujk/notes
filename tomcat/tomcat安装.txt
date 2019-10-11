@@ -1,0 +1,5 @@
+1、wget http://mirror.bit.edu.cn/apache/tomcat/tomcat-8/v8.5.38/bin/apache-tomcat-8.5.38.tar.gz
+
+2、tar -zxf apache-tomcat-8.5.38.tar.gz
+
+3、进入bin，./catalina.sh start（stop）启动（关闭）
