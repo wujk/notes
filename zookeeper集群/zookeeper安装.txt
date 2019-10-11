@@ -1,0 +1,17 @@
+1、wget https://mirrors.tuna.tsinghua.edu.cn/apache/zookeeper/zookeeper-3.4.13/zookeeper-3.4.13.tar.gz
+
+2、tar -zxvf zookeeper-3.4.13.tar.gz
+
+3、将conf文件夹下zoo_sample.cfg复制一份，改名为zoo.cfg
+      cd zookeeper-3.4.13/conf/
+      cp zoo_sample.cfg zoo.cfg
+
+4、创建data目录
+mkdir zookeeper-3.4.13/data
+   
+5、vi zoo.cfg
+dataDir=/usr/local/wujk/zookeeper-3.4.13/data
+
+6、启动zookeeper：bin/zkServer.sh start
+关闭zookeeper：bin/zkServer.sh stop
+查看zookeeper状态：bin/zkServer.sh status
