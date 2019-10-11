@@ -1,0 +1,4 @@
+使用下面三种方法来解决
+1、使用 git rm 再删一次, git add . 后 git commit 提交
+2、直接 git commit -am “delete files” 提交
+3、使用 git add -all , 然后 git commit 提交
