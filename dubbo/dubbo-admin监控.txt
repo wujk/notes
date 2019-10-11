@@ -1,0 +1,7 @@
+1、git clone https://github.com/apache/incubator-dubbo.git
+2、git branch -b 1.5.x (只有1.5.x版本有dubbo-admin)
+3、进入dubbo-admin文件夹存在pom.xml
+4、mvn install -Dmaven.skip.test=true
+5、进入生成的target文件夹找到dubbo-admin-2.5.9.war
+6、修改dubbo.properties,根据自己的配置 （dubbo-admin\src\main\webapp\WEB-INF文件夹下的dubbo.properties文件，将dubbo.registry.address修改成启动了zookeeper注册中心的主机IP和端口即可。）
+7、启动tomcat，访问http://localhost:8081/dubbo-admin-2.5.9/
