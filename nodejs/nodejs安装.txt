@@ -1,0 +1,14 @@
+1、wget https://nodejs.org/dist/v10.16.3/node-v10.16.3-linux-x64.tar.gz
+
+2、tar -zxvf node-v10.16.3-linux-x64.tar.gz 
+
+3、cd node-v10.16.3-linux-x64
+
+4、./bin/node -v  
+输出：v10.16.3
+
+5、配置NODE_HOME，进入profile编辑环境变量
+vim /etc/profile
+export NODE_HOME=/usr/local/kevin/node-v10.16.3-linux-x64
+export PATH=$PATH:$NODE_HOME/bin
+source /etc/profile
