@@ -1,0 +1,67 @@
+1、wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-6.8.3.tar.gz （jdk1.8）
+
+2、tar -zxvf elasticsearch-6.8.3.tar.gz 
+
+3、cd elasticsearch-6.8.3
+
+4、./bin/elasticsearch -d  # 后台启动
+
+问题：
+需要被外网访问
+解决：vim config/elasticsearch.yml 添加 network.host: 0.0.0.0
+
+1、can not run elasticsearch as root
+解决：新建用户 adduser kevin，设置密码 passwd kevin  输入密码：kevin123  确认密码：kevin123  su kevin切换用户
+
+2、/usr/local/kevin/elasticsearch-6.8.3/config/jvm.options
+解决：权限不足需要用root用户赋予kevin权限
+ chown -R kevin elasticsearch-6.8.3
+ 
+3、seccomp unavailable: CONFIG_SECCOMP not compiled into kernel, CONFIG_SECCOMP and CONFIG_SECCOMP_FILTER are needed 
+解决：在elasticsearch.yml 文件末尾加上bootstrap.system_call_filter: false
+
+4、max file descriptors [4096] for elasticsearch process is too low, increase to at least [65535]
+每个进程最大同时打开文件数太小，可通过下面2个命令查看当前数量
+ulimit -Hn
+ulimit -Sn
+解决：vim /etc/security/limits.conf
+*                soft    nofile          65536
+*                hard    nofile          65536
+
+5、max number of threads [1024] for user [kevin] is too low, increase to at least [4096]
+ulimit -Hu
+ulimit -Su
+解决：vim /etc/security/limits.conf 和 vim /etc/security/limits.d/90-nproc.conf
+*                soft    nproc           4096
+*                hard    nproc           4096
+
+修改完4、5后重启
+
+6、 max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+解决：vim /etc/sysctl.conf  增加配置vm.max_map_count=262144  sysctl -p
+
+
+请求 curl http://localhost:9200
+返回
+{
+  "name" : "xHxwxMd",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "bpegjuQSTzWbVsy240P8Aw",
+  "version" : {
+    "number" : "6.8.3",
+    "build_flavor" : "default",
+    "build_type" : "tar",
+    "build_hash" : "0c48c0e",
+    "build_date" : "2019-08-29T19:05:24.312154Z",
+    "build_snapshot" : false,
+    "lucene_version" : "7.7.0",
+    "minimum_wire_compatibility_version" : "5.6.0",
+    "minimum_index_compatibility_version" : "5.0.0"
+  },
+  "tagline" : "You Know, for Search"
+}
+
+
+
+
+
