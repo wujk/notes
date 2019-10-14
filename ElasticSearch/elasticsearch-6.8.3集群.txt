@@ -1,0 +1,108 @@
+1、cp -r elasticsearch-6.8.3/ elasticsearch-cluster/9200
+   cp -r elasticsearch-6.8.3/ elasticsearch-cluster/9201
+   cp -r elasticsearch-6.8.3/ elasticsearch-cluster/9202
+   
+2、修改配置文件
+   主节点：
+cluster.name: my-application
+node.name: node-1
+#path.data: /usr/local/kevin/elasticsearch-cluster/data
+#path.logs: /usr/local/kevin/elasticsearch-cluster/logs
+#discovery.zen.minimum_master_nodes：2
+http.port: 9200
+transport.tcp.port: 9300
+bootstrap.memory_lock: true
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300", "127.0.0.1:9301", "127.0.0.1:9302"]
+bootstrap.system_call_filter: false
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: true  #是否是主节点
+node.data: true
+
+从节点1：
+cluster.name: my-application
+node.name: node:2
+#path.data: /usr/local/kevin/elasticsearch-cluster/data
+#path.logs: /usr/local/kevin/elasticsearch-cluster/logs
+#discovery.zen.minimum_master_nodes：2
+http.port: 9201
+transport.tcp.port: 9301
+bootstrap.memory_lock: true
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300", "127.0.0.1:9301", "127.0.0.1:9302"]
+bootstrap.system_call_filter: false
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: false
+node.data: true
+
+从节点2：
+cluster.name: my-application
+node.name: node:3
+#path.data: /usr/local/kevin/elasticsearch-cluster/data
+#path.logs: /usr/local/kevin/elasticsearch-cluster/logs
+#discovery.zen.minimum_master_nodes：2
+http.port: 9202
+transport.tcp.port: 9302
+bootstrap.memory_lock: true
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300", "127.0.0.1:9301", "127.0.0.1:9302"]
+bootstrap.system_call_filter: false
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: false  
+node.data: true
+
+3、discovery.zen.minimum_master_nodes该配置主要防止集群发生“脑裂”
+	假设按上面配置，只有node-1是主节点，如果主节点关闭会导致集群失败。
+	可以把多个节点的node.master设为true，此时需要配置discovery.zen.minimum_master_nodes，最低需要几个主节点才能生成集群，比如10个节点其中2个主节点，8个从节点，假设1个主节，4个从节点挂了discovery.zen.minimum_master_nodes没有设置最少2个主节点，可能导致这5个节点单独组成集群，这样形成2个集群。如果设置了discovery.zen.minimum_master_nodes：2，则集群就无法使用。
+
+三个节点配置如下：
+cluster.name: my-application
+node.name: node-1
+#path.data: /usr/local/kevin/elasticsearch-cluster/data
+#path.logs: /usr/local/kevin/elasticsearch-cluster/logs
+bootstrap.memory_lock: true
+network.host: 0.0.0.0
+http.port: 9200
+transport.tcp.port: 9300
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300", "127.0.0.1:9301", "127.0.0.1:9302"]
+discovery.zen.minimum_master_nodes: 2
+bootstrap.system_call_filter: false
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: true
+node.data: true
+
+
+cluster.name: my-application
+node.name: node-2
+#path.data: /usr/local/kevin/elasticsearch-cluster/data
+#path.logs: /usr/local/kevin/elasticsearch-cluster/logs
+bootstrap.memory_lock: true
+network.host: 0.0.0.0
+http.port: 9201
+transport.tcp.port: 9301
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300", "127.0.0.1:9301", "127.0.0.1:9302"]
+discovery.zen.minimum_master_nodes: 2
+bootstrap.system_call_filter: false
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: true
+node.data: true
+
+
+cluster.name: my-application
+node.name: node-3
+#path.data: /path/to/data
+#path.logs: /path/to/logs
+bootstrap.memory_lock: true
+network.host: 0.0.0.0
+http.port: 9202
+transport.tcp.port: 9302
+discovery.zen.ping.unicast.hosts: ["127.0.0.1:9300", "127.0.0.1:9301", "127.0.0.1:9302"]
+discovery.zen.minimum_master_nodes: 2
+bootstrap.system_call_filter: false
+http.cors.enabled: true 
+http.cors.allow-origin: "*"
+node.master: true
+node.data: true
+

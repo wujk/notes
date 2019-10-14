@@ -61,6 +61,17 @@ ulimit -Su
   "tagline" : "You Know, for Search"
 }
 
+注意：性能优化之bootstrap.memory_lock: true
+如果bootstrap.memory_lock这项使用默认配置，会导致硬盘频繁读，IOPS变高。因此bootstrap.memory_lock需要设置成bootstrap.memory_lock: true
+
+会出现问题：
+1、memory locking requested for elasticsearch process but memory is not locked
+解决：vim /etc/security/limits.conf
+* 			     hard    memlock         unlimited
+
+* 			     soft 	 memlock         unlimited
+
+
 
 
 
