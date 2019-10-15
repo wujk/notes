@@ -1,0 +1,47 @@
+1、wget https://artifacts.elastic.co/downloads/logstash/logstash-6.8.3.tar.gz
+
+2、tar -zxvf logstash-6.8.3.tar.gz
+
+3、简单测试：bin/logstash -e 'input { stdin { } } output { stdout {} }'
+
+4、配置logstash输出到elasticsearch
+	mv config/logstash_sample.conf config/logstash.conf
+	vim config/logstash.conf
+	input {
+	  beats {
+		port => 5044
+	  }
+	}
+
+	output {
+	  elasticsearch {
+		hosts => ["http://192.168.140.159:9200","http://192.168.140.159:9201","http://192.168.140.159:9202"]
+		index => "%{[@metadata][beat]}-%{[@metadata][version]}-%{+YYYY.MM.dd}"
+		#user => "elastic"
+		#password => "changeme"
+	  }
+	}
+	
+5、启动sudo ./bin/logstash -f config/logstash.conf >logstash.log  2>&1 &
+
+6、logstash结合filebeat
+
+7、wget https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-6.8.3-linux-x86_64.tar.gz
+
+8、tar -zxvf filebeat-6.8.3-linux-x86_64.tar.gz
+
+9、vim filebeat.yml
+	filebeat.inputs:
+	- type: log
+	  enabled: true
+	  paths:
+		- /var/log/logstash.log
+	output.logstash:
+	  hosts: ["192.168.1.4:5044"]
+	  
+10、启动sudo ./filebeat -e -c filebeat.yml >filebeat.log 2>&1 &
+
+11、代码输出日志进入/var/log/logstash.log，就会在es中记录日志了
+比如：
+nohup java -jar  spring-boot-logstash.jar > /var/log/logstash.log 2>&1  &
+
