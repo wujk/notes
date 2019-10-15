@@ -1,0 +1,10 @@
+1、克隆之后mac地址相同，需要重新生成mac地址
+
+2、cd /etc/udev/rules.d/
+
+3、vim 70-persistent-net.rules 注释掉老的mac地址把新的mac地址的NAME改成eth0
+# PCI device 0x8086:0x100f (e1000)
+#SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="00:50:56:3f:09:34", ATTR{type}=="1", KERNEL=="eth*", NAME="eth0"
+
+# PCI device 0x8086:0x100f (e1000)
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="00:50:56:20:49:f5", ATTR{type}=="1", KERNEL=="eth*", NAME="eth0"

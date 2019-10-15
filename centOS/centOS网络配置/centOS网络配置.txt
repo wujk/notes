@@ -1,0 +1,24 @@
+ifconfig 查看网络配置
+
+1、cd /etc/sysconfig/network-scripts
+
+2、vim ifcfg-eth0
+	DEVICE=eth0
+	TYPE=Ethernet
+	UUID=3f9610c1-d413-45e5-8889-8acc2d2b8248
+	ONBOOT=yes
+	NM_CONTROLLED=yes
+	BOOTPROTO=static
+	DEFROUTE=yes
+	IPV4_FAILURE_FATAL=yes
+	IPV6INIT=no
+	NAME="System eth0"
+	HWADDR=00:50:56:20:49:F5
+	PEERDNS=yes
+	PEERROUTES=yes
+	IPADDR=192.168.140.77
+	NETMASK=255.255.255.0
+	GATEWAY=192.168.140.1
+	DNS1=114.114.114.114
+	
+3、service network restart
