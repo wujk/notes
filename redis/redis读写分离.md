@@ -390,14 +390,14 @@
 
     哨兵默认用26379端口，默认不能跟其他机器在指定端口连通，只能在本地访问
     
-    mkdir /etc/sentinal
-    mkdir -p /var/sentinal/5000
+    mkdir -p /etc/sentinel
+    mkdir -p /var/sentinel/5000
     
     /etc/sentinel/5000.conf
     
     port 5000
     bind 192.168.31.205
-    dir /var/sentinal/5000
+    dir /var/sentinel/5000
     sentinel monitor mymaster 192.168.31.205 6379 2
     sentinel down-after-milliseconds mymaster 30000
     sentinel failover-timeout mymaster 60000
@@ -405,16 +405,16 @@
     
     port 5000
     bind 192.168.31.206
-    dir /var/sentinal/5000
-    sentinel monitor mymaster 192.168.31.206 6379 2
+    dir /var/sentinel/5000
+    sentinel monitor mymaster 192.168.31.205 6379 2
     sentinel down-after-milliseconds mymaster 30000
     sentinel failover-timeout mymaster 60000
     sentinel parallel-syncs mymaster 1
     
     port 5000
     bind 192.168.31.206
-    dir /var/sentinal/5000
-    sentinel monitor mymaster 192.168.31.187 206 2
+    dir /var/sentinel/5000
+    sentinel monitor mymaster 192.168.31.205 6379 2
     sentinel down-after-milliseconds mymaster 30000
     sentinel failover-timeout mymaster 60000
     sentinel parallel-syncs mymaster 1
@@ -423,8 +423,8 @@
 
     在node01、node02、node03三台机器上，分别启动三个哨兵进程，组成一个集群，观察一下日志的输出
     
-    redis-sentinel /etc/sentinal/5000.conf
-    redis-server /etc/sentinal/5000.conf --sentinel
+    redis-sentinel /etc/sentinel/5000.conf
+    redis-server /etc/sentinel/5000.conf --sentinel
     
     日志里会显示出来，每个哨兵都能去监控到对应的redis master，并能够自动发现对应的slave
     
@@ -434,7 +434,7 @@
 
     redis-cli -h 192.168.31.205 -p 5000
     
-    sentinel master mymaster
+    SENTINEL master mymaster
     SENTINEL slaves mymaster
     SENTINEL sentinels mymaster
     
@@ -452,7 +452,7 @@
 
 ###### 18、slave的永久下线
 
-让master摘除某个已经下线的slave：SENTINEL RESET mastername，在所有的哨兵上面执行
+    让master摘除某个已经下线的slave：SENTINEL RESET mastername，在所有的哨兵上面执行
 
 ###### 19、slave切换为Master的优先级
 
@@ -465,7 +465,7 @@
     master上启用安全认证，requirepass
     master连接口令，masterauth
 
-    sentinal，sentinel auth-pass <master-group-name> <pass>
+    sentinel，sentinel auth-pass <master-group-name> <pass>
     
 ###### 21、容灾演练
     
