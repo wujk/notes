@@ -1,18 +1,18 @@
-1¡¢ĞŞ¸Äredis.conf
-   ÆôÓÃredis-cluster¼¯Èº
+1ã€ä¿®æ”¹redis.conf
+   å¯ç”¨redis-clusteré›†ç¾¤
    cluster-enabled yes
 
-   ¼¯Èº½ÚµãÅäÖÃÎÄ¼ş 
-   ¸ÃÎÄ¼şÎŞĞèÊÖ¹¤ĞŞ¸Ä£¬ÓÉredis×Ô¶¯Î¬»¤£¨´´½¨ºÍ¸üĞÂ£©
-   ĞèÒª×¢Òâ£¬µ¥»úÔËĞĞ¶àÊµÀıÊ±£¬È·±£¸ÃÎÄ¼şÃ»ÓĞ±»ÆäËûÊµÀı¸²¸Ç£¨²»ÔÊĞíÖØÃû£©
+   é›†ç¾¤èŠ‚ç‚¹é…ç½®æ–‡ä»¶ 
+   è¯¥æ–‡ä»¶æ— éœ€æ‰‹å·¥ä¿®æ”¹ï¼Œç”±redisè‡ªåŠ¨ç»´æŠ¤ï¼ˆåˆ›å»ºå’Œæ›´æ–°ï¼‰
+   éœ€è¦æ³¨æ„ï¼Œå•æœºè¿è¡Œå¤šå®ä¾‹æ—¶ï¼Œç¡®ä¿è¯¥æ–‡ä»¶æ²¡æœ‰è¢«å…¶ä»–å®ä¾‹è¦†ç›–ï¼ˆä¸å…è®¸é‡åï¼‰
    cluster-config-file nodes-6377.conf
 
-   ½Úµã³¬Ê±Ê±³¤£¨ºÁÃë£©
+   èŠ‚ç‚¹è¶…æ—¶æ—¶é•¿ï¼ˆæ¯«ç§’ï¼‰
    cluster-node-timeout 15000
 
-   Èç¹û¶Ô¼¯ÈºÉèÖÃÃÜÂë£¬ÄÇÃ´requirepassºÍmasterauth¶¼ĞèÒªÉèÖÃ
+   å¦‚æœå¯¹é›†ç¾¤è®¾ç½®å¯†ç ï¼Œé‚£ä¹ˆrequirepasså’Œmasterauthéƒ½éœ€è¦è®¾ç½®
 
-2¡¢Æô¶¯redis£¨sh½Å±¾£¨redis-start.sh£©»òÊÖ¶¯£©
+2ã€å¯åŠ¨redisï¼ˆshè„šæœ¬ï¼ˆredis-start.shï¼‰æˆ–æ‰‹åŠ¨ï¼‰
 cd /usr/local/kevin/7001/redis01
 ./src/redis-server redis.conf
 
@@ -31,15 +31,15 @@ cd /usr/local/kevin/7005/redis05
 cd /usr/local/kevin/7006/redis06
 ./src/redis-server redis.conf 
 
-3¡¢ÕÒµ½rubyÏÂredis²å¼ş
+3ã€æ‰¾åˆ°rubyä¸‹redisæ’ä»¶
 find / -name client.rb
-ĞŞ¸Ä/usr/local/ruby/lib/ruby/gems/2.6.0/gems/redis-4.1.0/lib/redis/client.rbÖĞÃÜÂë
+ä¿®æ”¹/usr/local/ruby/lib/ruby/gems/2.6.0/gems/redis-4.1.0/lib/redis/client.rbä¸­å¯†ç 
 
 
-4¡¢´´½¨¼¯Èº
+4ã€åˆ›å»ºé›†ç¾¤
 ./redis-cli --cluster create 192.168.140.159:7001 192.168.140.159:7002 192.168.140.159:7003 192.168.140.159:7004 192.168.140.159:7005 192.168.140.159:7006 -a "pass" --cluster-replicas 1 
 
-ÅúÁ¿¹Ø±Õredis
+æ‰¹é‡å…³é—­redis
 pids=`ps -ef | grep 'redis' | grep -v 'grep' | awk '{print $2}'`
 for str in $pids
 do
