@@ -4,15 +4,17 @@
 
 3、tar -zxvf ruby-2.6.1.tar.gz
 
-4、./configure --prefix=/usr/local/ruby -prefix是将ruby安装到指定目录，也可以自定义
+4、./configure --prefix=/usr/local/wujk/ruby -prefix是将ruby安装到指定目录，也可以自定义
 
 5、make && make install
 
-6、Ruby环境变量配置（需要root权限）vi /etc/profile   export PATH=$PATH:/usr/local/ruby/bin
+6、Ruby环境变量配置（需要root权限）vi /etc/profile   export PATH=$PATH:/usr/local/wujk/ruby/bin
 
 7、重启配置文件：source /etc/profile
 
 8、ruby -v查看是否配置完成
+
+9、gem intsall redis
 
 
 -----------------------------------------------------------------------------------------------------------

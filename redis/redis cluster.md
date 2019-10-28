@@ -28,7 +28,7 @@
     pidfile		/var/run/redis_7001.pid 						
     dir 		/var/redis/7001		
     logfile /var/log/redis/7001.log
-    bind 192.168.31.187		
+    bind 192.168.31.205	
     appendonly yes
     
     至少要用3个master节点启动，每个master加一个slave节点，先选择6个节点，启动6个实例
@@ -51,17 +51,29 @@
     yum install -y rubygems
     gem install redis
     
-    cp /usr/local/redis-3.2.8/src/redis-trib.rb /usr/local/bin
+    --------------------------------------以下为老版本创建集群--------------------------------------------------
+    cp /usr/local/wujk/redis-5.0.5/src/redis-trib.rb /usr/local/bin
     
-    redis-trib.rb create --replicas 1 192.168.31.187:7001 192.168.31.187:7002 192.168.31.19:7003 192.168.31.19:7004 192.168.31.227:7005 192.168.31.227:7006
+    redis-trib.rb create --replicas 1 192.168.31.205:7001 192.168.31.205:7002 192.168.31.206:7003 192.168.31.206:7004 192.168.31.207:7005 192.168.31.207:7006
     
     --replicas: 每个master有几个slave
     
-    6台机器，3个master，3个slave，尽量自己让master和slave不在一台机器上
-    
     redis-trib.rb check 192.168.31.187:7001
     
-### 6、读写分离+高可用+多master
+    ---------------------------------------以下为新版本创建集群--------------------------------------------------------
+    
+    redis-cli --cluster create 192.168.31.205:7001 192.168.31.205:7002 192.168.31.206:7003 192.168.31.206:7004 192.168.31.207:7005 192.168.31.207:7006 --cluster-replicas 1 
+    
+    redis-cli --cluster check 192.168.31.205:7001
+    
+    
+    
+    6台机器，3个master，3个slave，尽量自己让master和slave不在一台机器上
+ 
+### 6、访问集群
+    redis-cli -h 192.168.31.207 -p 7001 -c （-c 命令是集群访问不加会出现error moved错误）
+       
+### 7、读写分离+高可用+多master
     读写分离：每个master都有一个slave
     高可用：master宕机，slave自动被切换过去
     多master：横向扩容支持更大数据量
