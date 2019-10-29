@@ -1,0 +1,1 @@
+mvn install:install-file -Dfile=F:\apache-maven-3.0.5\mvn_repo\redis\clients\jedis\2.5.2\jedis-2.5.2.jar -DgroupId=redis.clients -DartifactId=jedis -Dversion=2.5.2 -Dpackaging=jar
