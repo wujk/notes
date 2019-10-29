@@ -77,3 +77,45 @@
     读写分离：每个master都有一个slave
     高可用：master宕机，slave自动被切换过去
     多master：横向扩容支持更大数据量
+    
+### 8、水平扩容加入master
+    搞一个7007.conf，再搞一个redis_7007启动脚本
+    手动启动一个新的redis实例，在7007端口上
+    --------------------------------------以下为老版本创建集群--------------------------------------------------
+    redis-trib.rb add-node 192.168.31.208:7007 192.168.31.205:7001
+    redis-trib.rb check 192.168.31.205:7001
+    ---------------------------------------以下为新版本创建集群--------------------------------------------------------
+    redis-cli --cluster add-node 192.168.31.208:7007 192.168.31.205:7001
+    redis-cli --cluster check 192.168.31.205:7001
+    
+    连接到新的redis实例上，cluster nodes，确认自己是否加入了集群，作为了一个新的master
+    
+    resharding的意思就是把一部分hash slot从一些node上迁移到另外一些node上
+    
+    redis-trib.rb reshard 192.168.31.205:7001
+    
+    redis-cli --cluster reshard 192.168.31.205:7001
+    
+    要把之前3个master上，总共4096个hashslot迁移到新的第四个master上去
+    
+    How many slots do you want to move (from 1 to 16384)?  1000（移动几个slot）
+    
+    
+### 9、水平扩容加入slave
+    redis-trib.rb add-node --slave --master-id 28927912ea0d59f6b790a50cf606602a5ee48108 192.168.31.208:7008 192.168.31.205:7001
+    
+    redis-cli --cluster --slave --master-id 28927912ea0d59f6b790a50cf606602a5ee48108 192.168.31.208:7008 192.168.31.205:7001
+    
+### 10、删除node
+       
+    先用resharding将数据都移除到其他节点，确保node为空之后，才能执行remove操作
+    
+    redis-trib.rb del-node 192.168.31.205:7001 bd5a40a6ddccbd46a0f4a2208eb25d2453c2a8db
+    
+    redis-cli --cluster del-node 192.168.31.205:7001 bd5a40a6ddccbd46a0f4a2208eb25d2453c2a8db
+    
+    2个是1365，1个是1366
+    
+    当你清空了一个master的hashslot时，redis cluster就会自动将其slave挂载到其他master上去
+    
+    这个时候就只要删除掉master就可以了
