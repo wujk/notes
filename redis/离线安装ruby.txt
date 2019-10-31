@@ -1,68 +1,68 @@
-1¡¢http://www.ruby-lang.org/en/downloads/
+1ã€http://www.ruby-lang.org/en/downloads/
 
-2¡¢wget https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.1.tar.gz
+2ã€wget https://cache.ruby-lang.org/pub/ruby/2.6/ruby-2.6.1.tar.gz
 
-3¡¢tar -zxvf ruby-2.6.1.tar.gz
+3ã€tar -zxvf ruby-2.6.1.tar.gz
 
-4¡¢./configure --prefix=/usr/local/wujk/ruby -prefixÊÇ½«ruby°²×°µ½Ö¸¶¨Ä¿Â¼£¬Ò²¿ÉÒÔ×Ô¶¨Òå
+4ã€./configure --prefix=/usr/local/wujk/ruby -prefixæ˜¯å°†rubyå®‰è£…åˆ°æŒ‡å®šç›®å½•ï¼Œä¹Ÿå¯ä»¥è‡ªå®šä¹‰
 
-5¡¢make && make install
+5ã€make && make install
 
-6¡¢Ruby»·¾³±äÁ¿ÅäÖÃ£¨ĞèÒªrootÈ¨ÏŞ£©vi /etc/profile   export PATH=$PATH:/usr/local/wujk/ruby/bin
+6ã€Rubyç¯å¢ƒå˜é‡é…ç½®ï¼ˆéœ€è¦rootæƒé™ï¼‰vi /etc/profile   export PATH=$PATH:/usr/local/wujk/ruby/bin
 
-7¡¢ÖØÆôÅäÖÃÎÄ¼ş£ºsource /etc/profile
+7ã€é‡å¯é…ç½®æ–‡ä»¶ï¼šsource /etc/profile
 
-8¡¢ruby -v²é¿´ÊÇ·ñÅäÖÃÍê³É
+8ã€ruby -væŸ¥çœ‹æ˜¯å¦é…ç½®å®Œæˆ
 
-9¡¢gem intsall redis
+9ã€gem intsall redis
 
 
 -----------------------------------------------------------------------------------------------------------
 
-gem install±¨´í£º
+gem installæŠ¥é”™ï¼š
 Loading command: install (LoadError)
 	cannot load such file -- zlib
 
-½â¾ö£º
-1¡¢ÏÈ°²×° zlibµÄ¹¤¾ß°ü
+è§£å†³ï¼š
+1ã€å…ˆå®‰è£… zlibçš„å·¥å…·åŒ…
 yum install zlib
  
-2¡¢°²×°Íêzlibºó£¬ÔÙ°²×°zlib-devel,ËüÁ½ÊÇÓĞÒÀÀµ¹ØÏµµÄ
+2ã€å®‰è£…å®Œzlibåï¼Œå†å®‰è£…zlib-devel,å®ƒä¸¤æ˜¯æœ‰ä¾èµ–å…³ç³»çš„
 yum install zlib-devel
 
-3¡¢½øÈërubyÔ´Âë°ü£¨ruby-2.6.1/ext/zlib£©
+3ã€è¿›å…¥rubyæºç åŒ…ï¼ˆruby-2.6.1/ext/zlibï¼‰
 
-4¡¢ruby ./extconf.rb
+4ã€ruby ./extconf.rb
 
-5¡¢make £¨make: *** Ã»ÓĞ¹æÔò¿ÉÒÔ´´½¨¡°zlib.o¡±ĞèÒªµÄÄ¿±ê¡°/include/ruby.h¡±¡£ Í£Ö¹¡££©
+5ã€make ï¼ˆmake: *** æ²¡æœ‰è§„åˆ™å¯ä»¥åˆ›å»ºâ€œzlib.oâ€éœ€è¦çš„ç›®æ ‡â€œ/include/ruby.hâ€ã€‚ åœæ­¢ã€‚ï¼‰
 
-6¡¢vi Makefile  ĞŞ¸Ä³É£¨zlib.o: ../../include/ruby.h£©¼´¿É
+6ã€vi Makefile  ä¿®æ”¹æˆï¼ˆzlib.o: ../../include/ruby.hï¼‰å³å¯
 
-7¡¢make
+7ã€make
 
-8¡¢make install
+8ã€make install
 
 
 ---------------------------------------------------------------------------------------------------------------------
 
 cannot load such file -- openssl
 
-½â¾ö£º
-1¡¢1¡¢ÏÈ°²×° opensslµÄ¹¤¾ß°ü
+è§£å†³ï¼š
+1ã€1ã€å…ˆå®‰è£… opensslçš„å·¥å…·åŒ…
 yum install openssl
  
-2¡¢°²×°Íêopensslºó£¬ÔÙ°²×°openssl-devel,ËüÁ½ÊÇÓĞÒÀÀµ¹ØÏµµÄ
+2ã€å®‰è£…å®Œopensslåï¼Œå†å®‰è£…openssl-devel,å®ƒä¸¤æ˜¯æœ‰ä¾èµ–å…³ç³»çš„
 yum install openssl-devel
 
-3¡¢½øÈërubyÔ´Âë°ü£¨ruby-2.6.1/ext/openssl£©
+3ã€è¿›å…¥rubyæºç åŒ…ï¼ˆruby-2.6.1/ext/opensslï¼‰
 
-4¡¢ruby ./extconf.rb
+4ã€ruby ./extconf.rb
 
-5¡¢make £¨make: *** Ã»ÓĞ¹æÔò¿ÉÒÔ´´½¨¡°ossl.o£¬ossl_asn1.o¶à¸ö¡±ĞèÒªµÄÄ¿±ê¡°/include/ruby.h¡±¡£ Í£Ö¹¡££©
+5ã€make ï¼ˆmake: *** æ²¡æœ‰è§„åˆ™å¯ä»¥åˆ›å»ºâ€œossl.oï¼Œossl_asn1.oå¤šä¸ªâ€éœ€è¦çš„ç›®æ ‡â€œ/include/ruby.hâ€ã€‚ åœæ­¢ã€‚ï¼‰
 
-6¡¢vi Makefile  ĞŞ¸Ä³É£¨ossl.o£¨ossl_asn1.oµÈ£©: ../../include/ruby.h£©¼´¿É
+6ã€vi Makefile  ä¿®æ”¹æˆï¼ˆossl.oï¼ˆossl_asn1.oç­‰ï¼‰: ../../include/ruby.hï¼‰å³å¯
 
-7¡¢make
+7ã€make
 
-8¡¢make install
+8ã€make install
 
