@@ -25,7 +25,7 @@
     
     去掉-XX:+UseCompressedOops即可
 
-### 6、按照上述步骤在另外两台机器分别安装kafka。用scp把kafka拷贝到其他机器即可。
+### 6、按照上述步骤在另外两台机器分别安装kafka
     唯一区别的，就是server.properties中的broker.id，要设置为1和2
     
     在三台机器上的kafka目录下，分别执行以下命令：nohup bin/kafka-server-start.sh config/server.properties &
