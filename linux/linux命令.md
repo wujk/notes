@@ -1,4 +1,16 @@
 # linux 常用命令
+#####  查看linux系统的CPU型号、类型以及大小
+    cat /proc/cpuinfo
+
+##### 查看linux系统内存大小的详细信息，可以查看总内存，剩余内存、可使用内存等信息
+    cat /proc/meminfo  
+      
+##### 查看linux系统各分区的使用情况
+    df -h 
+    
+##### 查看linux系统内存使用量和交换区使用量
+    free -m 
+    
 #####  yum使用
    
     yum [options] [command] [package ...]

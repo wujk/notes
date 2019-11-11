@@ -1,0 +1,6 @@
+#!/bin/bash
+#chkconfig: 2345 80 90
+#description:auto_run
+第一行，告诉系统使用的shell,所以的shell脚本都是这样。
+第二行，chkconfig后面有三个参数2345,80和90告诉chkconfig程序，需要在rc2.d~rc5.d目录下，创建名字为 S80auto_run的文件连接，连接到/etc/rc.d/init.d目录下的的auto_run脚本。第一个字符是S，系统在启动的时候，运行脚 本auto_run，就会添加一个start参数，告诉脚本，现在是启动模式。同时在rc0.d和rc6.d目录下，创建名字为K90auto_run的 文件连接，第一个字符为K，个系统在关闭系统的时候，会运行auto_run，添加一个stop，告诉脚本，现在是关闭模式。
+注意上面的三行是中，第二，第三行是必须的
