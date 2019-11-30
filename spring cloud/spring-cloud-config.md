@@ -11,6 +11,22 @@
         <groupId>org.springframework.cloud</groupId>
         <artifactId>spring-cloud-config-server</artifactId>
     </dependency>
+
+2、配置文件（application.yml）本地文件配置
+-
+    server:
+      port: 8770
+    
+    spring:
+      application:
+        name: config-service
+      profiles:
+        active: native
+      cloud:
+        config:
+          server:
+            native:
+              search-locations: classpath:/config
     
 2、配置文件（application.properties）
 -
